@@ -1,4 +1,4 @@
-const baseURL = "https://swapi.tech/api/";
+const baseURL = "https://swapi.dev/api/";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
