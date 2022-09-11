@@ -1,15 +1,17 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom";
-import starWarsImg from "../../img/star_wars_img.jpg"
 import { Context } from "../store/appContext";
+import "../../styles/home.css";
 
 const Card = (props) => {
   const {store,actions}= useContext(Context)
+  const imgUrl = props.imagen
+  const imgId = props.item.uid
   return (
   	<div>
       <div className="card p-2" style={{minWidth:"300px"}}>
-        <img src={starWarsImg} className="card-img-top" alt="..." />
+        <img src={imgUrl+imgId+".jpg"} className="card-img-top" alt="NO HAY IMAGEN PARA ESTE ITEM"/>
         <div className="card-body">
           <h5 className="card-title">{props.item.name}</h5>
           <p className="card-text">
@@ -17,17 +19,16 @@ const Card = (props) => {
             bulk of the card's content.
           </p>
           <div className="d-flex justify-content-between">
-          <Link to={`/${props.endpoint}/${props.item.uid}`} className="btn btn-outline-primary" >
-            Learn More!
+          <Link to={`/${props.endpoint}/${props.item.uid}`} className="btn btn-outline-dark boton" >
+            Detalles...
           </Link>
           <button type="button" onClick={(e) => {
           
             if(store && store.favorites.find((favorite,index) => {return favorite.url === `/${props.endpoint}/${props.item.uid}` })){
-              {/**Aqui va el motodo para remover el favorito */}
             } else{
               actions.addToFavorite(props.item.name, `/${props.endpoint}/${props.item.uid}` )
             }
-          } } className="btn btn-outline-warning">{store && store.favorites.find((favorite,index)=>{return favorite.url === `/${props.endpoint}/${props.item.uid}`}) ? (<i className="fas fa-heart"></i>) : (<i className="far fa-heart"></i>)}</button>
+          } } className="btn btn-outline-warning boton">{store && store.favorites.find((favorite,index)=>{return favorite.url === `/${props.endpoint}/${props.item.uid}`}) ? (<i className="fas fa-heart"></i>) : (<i className="far fa-heart"></i>)}</button>
             
           </div>
         </div>
